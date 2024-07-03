@@ -1,0 +1,30 @@
+{
+  "manifest_version": 2,
+  "name": "2dehands all-in-one extension",
+  "version": "1.0",
+  "description": "Adds browser menu to the toolbar which can filter many useful things. Check them out!",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "2dehands.filter@example.com"
+    }
+  },
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "*://www.2dehands.be/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {
+    "default_title": "2dehands All-in-One",
+    "default_icon": {
+      "48": "icons/2dehands_logo_icon.png"
+    },
+    "default_popup": "popup/all-in-one-menu.html"
+  },
+  "icons": {
+    "48": "icons/2dehands_logo_icon.png"
+  }
+}
