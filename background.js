@@ -35,3 +35,5 @@ chrome.runtime.onMessage.addListener((message) => {
     updateListener(message.isFilterEnabled);
   }
 });
+
+

@@ -17,6 +17,13 @@
   "background": {
     "scripts": ["background.js"]
   },
+  "content_scripts": [
+    {
+      "matches": ["*://www.2dehands.be/q/*"],
+      "exclude_matches": ["*://www.2dehands.be/q/*view:gallery-view*"],
+      "js": ["content-script.js"]
+    }
+  ],
   "browser_action": {
     "default_title": "2dehands All-in-One",
     "default_icon": {
