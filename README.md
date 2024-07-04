@@ -6,7 +6,7 @@ Extension for [2dehands](www.2dehands.be) which makes it easier to browse listin
 - [x] toggle auto order by new-old
     > sometimes, when browsing multiple listings for a while, you have to reselect the "sort by" option to sort by "new-old".  
     > This toggle ensures that whenever you press Enter to query a listing, the sort option is applied.
-- [x] filters out [Ad listings](##Ad-listing) and [blacklisted sellers](##blacklist)
+- [x] filters out [Ad listings](#Ad-listing) and [blacklisted sellers](#blacklist)
     > these are colored in red
 
 
