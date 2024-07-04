@@ -1,3 +1,19 @@
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+}
+
 body {
   min-width: 200px;
   font-family: Arial, sans-serif;
@@ -74,4 +90,30 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+.blacklisted.sellers {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* Adjust height as needed */
+  overflow-y: auto;
+}
+
+.blacklisted.sellers li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.blacklisted.sellers li button {
+  border: none;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+.blacklisted.sellers li button:hover {
+  background-color: #cc0000;
 }

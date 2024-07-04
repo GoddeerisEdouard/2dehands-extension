@@ -6,8 +6,9 @@ Extension for [2dehands](www.2dehands.be) which makes it easier to browse listin
 - [x] toggle auto order by new-old
     > sometimes, when browsing multiple listings for a while, you have to reselect the "sort by" option to sort by "new-old".  
     > This toggle ensures that whenever you press Enter to query a listing, the sort option is applied.
-- [x] filters out [Ad listings](##Ad-listing)
+- [x] filters out [Ad listings](##Ad-listing) and [blacklisted sellers](##blacklist)
     > these are colored in red
+
 
 # Installation
 Download as zip.  
@@ -16,7 +17,7 @@ go to `chrome://extensions/` and make sure developer mode is enabled.
 load extracted extension and select the folder.
 
 ## In Development
-- **blacklist** certain sellers (like Catawiki)
+nothing
 
 # Extra Info
 ## Ad Listing
@@ -30,3 +31,10 @@ Ad listings may consists of:
 **after**
 ![](afterAdExample.png)
 
+## blacklist
+some sellers are just reposting and spamming the first pages of a query. Hence this blacklist feature.
+
+now you can blacklist them via a button next under their name next to a listing.
+![](blacklistSellerBtnExample.png)
+you whitelist them again the blacklisted seller in the All-in-One Menu.
+![](blacklistedListMenuExample.png)

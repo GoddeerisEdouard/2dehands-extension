@@ -1,4 +1,4 @@
-function removeAdListings() {
+async function removeListings() {
   let viewListing = document.getElementsByClassName(
     "hz-Listings hz-Listings--list-view"
   )[0];
@@ -7,16 +7,72 @@ function removeAdListings() {
     viewListing.getElementsByClassName("hz-Listing")
   );
 
-  allListings.forEach((listing) => {
-    if (isAd(listing)) {
+  for (const listing of allListings) {
+    addBlackListSellerButton(listing);
+
+    if (await isAd(listing)) {
       listing.style.backgroundColor = "red";
+    } else if (listing.style.backgroundColor === "red") {
+      listing.style.backgroundColor = "white";
     }
-  });
+  }
 }
 
-// helper method to filter
-function isAd(listingElem) {
-  return isTopAdvertentie(listingElem);
+// HELPER METHODS
+
+function addBlackListSellerButton(listingElem) {
+  let sellerInfoElem = listingElem.getElementsByClassName(
+    "hz-Listing--sellerInfo"
+  )[0];
+
+  if (
+    sellerInfoElem.getElementsByClassName("seller-blacklist-container")[0] !=
+    null
+  ) {
+    return;
+  }
+
+  // create new btn part
+  let blacklistSellerSpan = document.createElement("span");
+  blacklistSellerSpan.className = "seller-blacklist-container";
+
+  let submitBlacklistLinkElem = document.createElement("input");
+  submitBlacklistLinkElem.value = "blacklist seller";
+  submitBlacklistLinkElem.type = "submit";
+
+  submitBlacklistLinkElem.onclick = () => {
+    let sellerName = sellerInfoElem.getElementsByClassName(
+      "hz-Listing-seller-name"
+    )[0].textContent;
+    // append blacklisted seller
+    chrome.storage.sync.get("blacklistedSellers", (result) => {
+      let blacklistedSellers = result.blacklistedSellers || [];
+
+      // prevent duplicates
+      if (blacklistedSellers.indexOf(sellerName) !== -1) {
+        return;
+      }
+
+      blacklistedSellers.push(sellerName);
+      chrome.storage.sync.set({ blacklistedSellers: blacklistedSellers });
+    });
+  };
+
+  // add submit btn to span container
+  blacklistSellerSpan.appendChild(submitBlacklistLinkElem);
+
+  // append after seller location info
+  sellerInfoElem.insertBefore(
+    blacklistSellerSpan,
+    sellerInfoElem.childNodes[2]
+  );
+}
+
+// helper methods to filter
+async function isAd(listingElem) {
+  return (
+    isTopAdvertentie(listingElem) || (await isSellerBlacklisted(listingElem))
+  );
 }
 
 // helper method
@@ -46,5 +102,23 @@ function isTopAdvertentie(listingElement) {
   return topAdvertentieText == "Topzoekertje";
 }
 
-// Controleer elke 500 milliseconden of het element is geladen
-const intervalId = setInterval(removeAdListings, 500);
+async function isSellerBlacklisted(listingElem) {
+  let sellerInfoElem = listingElem.getElementsByClassName(
+    "hz-Listing--sellerInfo"
+  )[0];
+  const sellerName = sellerInfoElem.getElementsByClassName(
+    "hz-Listing-seller-name"
+  )[0].textContent;
+  console.log(`checking ${sellerName}`);
+
+  const res = new Promise(function (resolve, _) {
+    chrome.storage.sync.get({ blacklistedSellers: true }, function (result) {
+      resolve(result.blacklistedSellers);
+    });
+  });
+  const bls = await res;
+
+  return bls.indexOf(sellerName) !== -1;
+}
+
+setInterval(removeListings, 500);
