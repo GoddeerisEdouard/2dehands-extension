@@ -1,5 +1,5 @@
 # 2dehands-extension
-Extension for [2dehands](www.2dehands.be) which makes it easier to browse listings.
+Extension for [2dehands](www.2dehands.be) which makes it easier to browse listings.  
 ![](2dehands-extension-menu.png)
 
 
@@ -10,7 +10,7 @@ Extension for [2dehands](www.2dehands.be) which makes it easier to browse listin
     > these are colored in red
 
 
-# Installation
+## Installation
 Download as zip.  
 extract zip.  
 go to `chrome://extensions/` and make sure developer mode is enabled.  
@@ -19,8 +19,8 @@ load extracted extension and select the folder.
 ## In Development
 nothing
 
-# Extra Info
-## Ad Listing
+## Extra Info
+### Ad Listing
 these are annoying listings that get promoted to stay on top, which makes you miss out on good deals by "normal" sellers.
 
 Ad listings may consists of:
@@ -31,10 +31,10 @@ Ad listings may consists of:
 **after**
 ![](afterAdExample.png)
 
-## blacklist
+### blacklist
 some sellers are just reposting and spamming the first pages of a query. Hence this blacklist feature.
 
-now you can blacklist them via a button next under their name next to a listing.
+now you can blacklist them via a button next under their name next to a listing.  
 ![](blacklistSellerBtnExample.png)
-you whitelist them again the blacklisted seller in the All-in-One Menu.
+you whitelist them again the blacklisted seller in the All-in-One Menu.  
 ![](blacklistedListMenuExample.png)
