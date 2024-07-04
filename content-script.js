@@ -3,6 +3,11 @@ async function removeListings() {
     "hz-Listings hz-Listings--list-view"
   )[0];
 
+  if (viewListing == null) {
+    // elements not loaded yet
+    return;
+  }
+
   let allListings = Array.from(
     viewListing.getElementsByClassName("hz-Listing")
   );
