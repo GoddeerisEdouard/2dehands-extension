@@ -109,7 +109,6 @@ async function isSellerBlacklisted(listingElem) {
   const sellerName = sellerInfoElem.getElementsByClassName(
     "hz-Listing-seller-name"
   )[0].textContent;
-  console.log(`checking ${sellerName}`);
 
   const res = new Promise(function (resolve, _) {
     chrome.storage.sync.get({ blacklistedSellers: true }, function (result) {
