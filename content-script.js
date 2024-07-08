@@ -116,7 +116,7 @@ async function isSellerBlacklisted(listingElem) {
   )[0].textContent;
 
   const res = new Promise(function (resolve, _) {
-    chrome.storage.sync.get({ blacklistedSellers: true }, function (result) {
+    chrome.storage.sync.get({ blacklistedSellers: [] }, function (result) {
       resolve(result.blacklistedSellers);
     });
   });
