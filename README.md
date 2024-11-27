@@ -1,6 +1,6 @@
 # 2dehands-extension
 Extension for [2dehands](www.2dehands.be) which makes it easier to browse listings.  
-![](2dehands-extension-menu.png)
+![](./assets/images/2dehands-extension-menu.png)
 
 
 - [x] toggle auto order by new-old
@@ -27,14 +27,14 @@ Ad listings may consists of:
 - "Topzoekertje" marking on bottom right
 
 **before**
-![](beforeAdExample.png)
+![](./assets/images/beforeAdExample.png)
 **after**
-![](afterAdExample.png)
+![](./assets/images/afterAdExample.png)
 
 ### blacklist
 some sellers are just reposting and spamming the first pages of a query. Hence this blacklist feature.
 
 now you can blacklist them via a button next under their name next to a listing.  
-![](blacklistSellerBtnExample.png)
+![](./assets/images/blacklistSellerBtnExample.png)
 you whitelist them again the blacklisted seller in the All-in-One Menu.  
-![](blacklistedListMenuExample.png)
+![](./assets/images/blacklistedListMenuExample.png)
