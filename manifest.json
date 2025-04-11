@@ -9,6 +9,7 @@
     }
   },
   "permissions": [
+    "activeTab",
     "webRequest",
     "webRequestBlocking",
     "storage",
@@ -22,7 +23,7 @@
       "matches": ["*://www.2dehands.be/q/*"],
       "exclude_matches": ["*://www.2dehands.be/q/*view:gallery-view*"],
       "js": ["src/scripts/content-script.js"],
-      "run_at": "document_end"
+      "run_at": "document_idle"
     }
   ],
   "browser_action": {
