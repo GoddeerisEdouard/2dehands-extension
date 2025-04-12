@@ -7,17 +7,16 @@ const listener = function (details) {
   }
 };
 
-const filter = { urls: ["*://www.2dehands.be/q/*"] };
-const extraInfoSpec = ["blocking"];
+const filter = {
+  urls: ["https://www.2dehands.be/q/*", "https://www.2dehands.be/l/*/#q:*"],
+};
 
 function updateListener(enabled) {
   // adds/removes the filter redirect
   if (enabled) {
-    chrome.webRequest.onBeforeRequest.addListener(
-      listener,
-      filter,
-      extraInfoSpec
-    );
+    chrome.webRequest.onBeforeRequest.addListener(listener, filter, [
+      "blocking",
+    ]);
   } else {
     chrome.webRequest.onBeforeRequest.removeListener(listener);
   }
@@ -35,5 +34,3 @@ chrome.runtime.onMessage.addListener((message) => {
     updateListener(message.isFilterEnabled);
   }
 });
-
-

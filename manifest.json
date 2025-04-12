@@ -20,8 +20,11 @@
   },
   "content_scripts": [
     {
-      "matches": ["*://www.2dehands.be/q/*"],
-      "exclude_matches": ["*://www.2dehands.be/q/*view:gallery-view*"],
+      "matches": [
+        "https://www.2dehands.be/q/*",
+        "https://www.2dehands.be/l/*/#q:*"
+      ],
+      "exclude_matches": ["*://www.2dehands.be/*|view:gallery-view*"],
       "js": ["src/scripts/content-script.js"],
       "run_at": "document_idle"
     }

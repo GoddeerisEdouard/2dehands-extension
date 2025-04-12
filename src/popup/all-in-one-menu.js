@@ -63,7 +63,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // make background of listing white again if it was red on 2dehands
         // we're only sending the message to tabs that have the listener to handle these messages
         chrome.tabs.query(
-          { url: "https://www.2dehands.be/q/*" },
+          {
+            url: [
+              "https://www.2dehands.be/q/*",
+              "https://www.2dehands.be/l/*/#q:*",
+            ],
+          },
           function (tabs) {
             for (let tab of tabs) {
               chrome.tabs.sendMessage(tab.id, {
