@@ -1,14 +1,22 @@
+// This file changes the browser URL to always include a sorting order, if enabled in the menu
+
 const listener = function (details) {
-  const url = new URL(details.url);
-  if (!url.hash.includes("sortOrder:DECREASING")) {
-    url.hash =
-      "#Language:all-languages|sortBy:SORT_INDEX|sortOrder:DECREASING|searchInTitleAndDescription:true";
-    return { redirectUrl: url.href };
+  let url = new URL(details.url);
+  if (url.hash.includes("sortBy:SORT_INDEX|sortOrder:DECREASING")) {
+    // if the URL already includes a sorting order, we don't need to do anything
+    return;
   }
+
+  if (url.hash.length === 0) {
+    url.hash = "sortBy:SORT_INDEX|sortOrder:DECREASING";
+  } else {
+    url.hash += "|sortBy:SORT_INDEX|sortOrder:DECREASING";
+  }
+  return { redirectUrl: url.href };
 };
 
 const filter = {
-  urls: ["https://www.2dehands.be/q/*", "https://www.2dehands.be/l/*/#q:*"],
+  urls: ["https://www.2dehands.be/q/*", "https://www.2dehands.be/l/*"],
 };
 
 function updateListener(enabled) {

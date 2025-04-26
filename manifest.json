@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "2dehands all-in-one extension",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Adds browser menu to the toolbar which can filter many useful things. Check them out!",
   "browser_specific_settings": {
     "gecko": {
