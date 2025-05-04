@@ -26,7 +26,7 @@ nothing
 Ad listings consist of:
 > - "Topzoekertje" marking on bottom right (PINK)
 >> annoying listings that get promoted to stay on top, which makes you miss out on good deals by "normal" sellers.
-> - "Bezoek website" on the bottom right (RED)
+> - "Bezoek website" on the bottom right OR multiple images on the frontpage (RED)
 >> webshops that are usually just promoting their "new" products
 
 **promoted listing before extension**
@@ -34,7 +34,8 @@ Ad listings consist of:
 **promoted listing after extension (PINK)**
 ![topzoekertje example](./assets/images/afterAdExample.png)
 **webshop listing after extension (RED)**
-![webshop example](./assets/images/webshopExample.png)
+![webshop bezoek website example](./assets/images/webshopExample.png)
+![webshop multiple images example](./assets/images/webshopMultipleImagesExample.png)
 
 
 ### blacklist

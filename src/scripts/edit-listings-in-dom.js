@@ -1,4 +1,4 @@
-// INDIVUAL LISTING METHOD
+// INDIVUAL LISTING METHODS
 function addBlackListSellerButton(listingElem) {
   // adds inplace blacklist button to the listing element
   let sellerInfoElem = listingElem.querySelector(".hz-Listing--sellerInfo");
@@ -64,13 +64,22 @@ function addBlackListSellerButton(listingElem) {
   );
 }
 
+function isListingSoldByShop(listingElem) {
+  // seller link is a shop if it has child nodes (e.g. a link to the shop page)
+  // or if there are multiple frontpage images in the listing
+  return (
+    listingElem.querySelector("span.hz-Listing-seller-link").hasChildNodes() ||
+    listingElem.querySelectorAll("figure.hz-Listing-image-container > div")
+      .length > 1
+  );
+}
+
+// main highlight method for all listings
 function highlightPriorityListingOrShopListingAndAddButton() {
   // highlighting means either coloring pink or red
-  let allListings = document.querySelectorAll(
+  for (let listing of document.querySelectorAll(
     "li.hz-Listing.hz-Listing--list-item"
-  );
-
-  for (let listing of allListings) {
+  )) {
     if (listing.offsetParent === null) continue; // Skip if the listing is not visible
 
     // we add a blacklist button to the listing
@@ -83,9 +92,7 @@ function highlightPriorityListingOrShopListingAndAddButton() {
     // if listing is ad, color pink
     if (listing.querySelector("span.hz-Listing-priority").textContent !== " ") {
       listing.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
-    } else if (
-      listing.querySelector("span.hz-Listing-seller-link").hasChildNodes()
-    ) {
+    } else if (isListingSoldByShop(listing)) {
       // if listing is sold by a Shop, color red (because it's an ad)
       listing.style.backgroundColor = "red";
     } else {
@@ -134,7 +141,9 @@ observer.observe(document.body, { childList: true, subtree: true });
       const receivedSellerName = message.sellerName;
 
       // Select all the listings that might have been marked red due to this seller
-      for (let li of document.querySelectorAll("li.hz-Listing")) {
+      for (let li of document.querySelectorAll(
+        "li.hz-Listing.hz-Listing--list-item"
+      )) {
         if (li.offsetParent === null || li.style.backgroundColor == "white") {
           continue; // Skip if the listing is invisible or already white
         }
@@ -151,8 +160,9 @@ observer.observe(document.body, { childList: true, subtree: true });
             li.querySelector("span.hz-Listing-priority").textContent !== " "
           ) {
             li.style.backgroundColor = "rgba(255, 0, 0, 0.2)";
-          } else {
-            // Reset the background color to white
+          } else if (!isListingSoldByShop(li)) {
+            // color can stay red if it's a shop, as it's the same color as when a listing would be blacklisted
+            // If not, reset the background color to white
             li.style.backgroundColor = "white";
           }
         }
