@@ -9,7 +9,7 @@ Extension for [2dehands](www.2dehands.be) which makes it easier to browse listin
 - [x] actually sort listings
     > 2dehands tends to put ad/paid listings first. This toggle ensures that the actually latest listings get put first.
 - [x] filters out [Ad listings](#Ad-listing) and [blacklisted sellers](#blacklist)
-    > these are colored in red
+    > these are colored in either RED or PINK
 
 
 ## Installation
@@ -23,20 +23,24 @@ nothing
 
 ## Extra Info
 ### Ad Listing
-these are annoying listings that get promoted to stay on top, which makes you miss out on good deals by "normal" sellers.
+Ad listings consist of:
+> - "Topzoekertje" marking on bottom right (PINK)
+>> annoying listings that get promoted to stay on top, which makes you miss out on good deals by "normal" sellers.
+> - "Bezoek website" on the bottom right (RED)
+>> webshops that are usually just promoting their "new" products
 
-Ad listings may consists of:
-- "Topzoekertje" marking on bottom right
-
-**before**
+**promoted listing before extension**
 ![](./assets/images/beforeAdExample.png)
-**after**
-![](./assets/images/afterAdExample.png)
+**promoted listing after extension (PINK)**
+![topzoekertje example](./assets/images/afterAdExample.png)
+**webshop listing after extension (RED)**
+![webshop example](./assets/images/webshopExample.png)
+
 
 ### blacklist
-some sellers are just reposting and spamming the first pages of a query. Hence this blacklist feature.
+some sellers are just reposting and spamming the first pages of a query. Hence this blacklist feature.  
 
-now you can blacklist them via a button next under their name next to a listing.  
+You can blacklist that seller with a "blacklist seller" button. Once clicked, all listings of this seller will be colored in RED.
 ![](./assets/images/blacklistSellerBtnExample.png)
-you whitelist them again the blacklisted seller in the All-in-One Menu.  
+you can whitelist them again by removing the seller in the All-in-One Menu.  
 ![](./assets/images/blacklistedListMenuExample.png)

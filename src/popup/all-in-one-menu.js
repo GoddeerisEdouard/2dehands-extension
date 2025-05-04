@@ -64,13 +64,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // we're only sending the message to tabs that have the listener to handle these messages
         chrome.tabs.query(
           {
-            url: [
-              "https://www.2dehands.be/q/*",
-              "https://www.2dehands.be/l/*/#q:*",
-            ],
+            url: ["https://www.2dehands.be/q/*", "https://www.2dehands.be/l/*"],
           },
           function (tabs) {
             for (let tab of tabs) {
+              console.log("sending message to tab", tab.id);
               chrome.tabs.sendMessage(tab.id, {
                 command: "removeFromBlacklist",
                 sellerName: sellerName,
