@@ -45,3 +45,15 @@ You can blacklist that seller with a "blacklist seller" button. Once clicked, al
 ![](./assets/images/blacklistSellerBtnExample.png)
 you can whitelist them again by removing the seller in the All-in-One Menu.  
 ![](./assets/images/blacklistedListMenuExample.png)
+
+## FAQ for developers
+**Why not manifest V3?**  
+1. Manifest V2 is still supported
+2. We would lose the "Auto Newest Filter" feature:  
+In manifest V3, there's no way to append to an existing url fragment (in our case `sortBy:SORT_INDEX|sortOrder:DECREASING`).  
+[Here]((https://developer.chrome.com/docs/extensions/develop/migrate/blocking-web-requests#redirect-multiple-urls))'s how an example how they migrate URL redirects.  
+These rule files only allow you to **replace** the fragment, and not append a part to the existing fragment.  
+So let's say you were browsing `https://www.2dehands.be/q/ps5/#Language:all-languages|distanceMeters:3000|postcode:1000`
+In our manifest V2 implementation, we can append to the existing fragment: it would become `https://www.2dehands.be/q/ps5/#Language:all-languages|distanceMeters:3000|postcode:1000|sortBy:SORT_INDEX|sortOrder:DECREASING`
+But if we used the rule file in manifest V3, that would be `https://www.2dehands.be/q/ps5/#sortBy:SORT_INDEX|sortOrder:DECREASING`.  
+As you can see, we lose our `distanceMeters:3000|postcode:1000` fragment part.
