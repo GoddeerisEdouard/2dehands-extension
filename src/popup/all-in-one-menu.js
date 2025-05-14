@@ -18,6 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
   realSortToggle.addEventListener("change", () => {
     const isRealSortEnabled = realSortToggle.checked;
 
+    if (newestFilterToggle.checked == false) {
+      // it makes sense to always have the "newest filter" enabled when "real sort" is enabled
+      newestFilterToggle.checked = true;
+      newestFilterToggle.dispatchEvent(new Event("change"));
+    }
+
     chrome.storage.sync.set({ realSortEnabled: isRealSortEnabled }, () => {
       // TODO: make the alert fit the menu when it appears / cleaner
 
