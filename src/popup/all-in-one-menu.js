@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   realSortToggle.addEventListener("change", () => {
     const isRealSortEnabled = realSortToggle.checked;
 
-    if (newestFilterToggle.checked == false) {
+    if (isRealSortEnabled && !newestFilterToggle.checked) {
       // it makes sense to always have the "newest filter" enabled when "real sort" is enabled
       newestFilterToggle.checked = true;
       newestFilterToggle.dispatchEvent(new Event("change"));
