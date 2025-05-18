@@ -1,9 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
+  function showMessageBanner(message, timeoutInSeconds = 3) {
+    const toggleElem = document
+      .querySelector("#real-sort-toggle")
+      .closest("tr");
+
+    let refreshAlertBanner = document.createElement("tr");
+    refreshAlertBanner.classList.add("refresh-alert-banner");
+    let tdElem = document.createElement("td");
+    // colspan 2 to make it full width
+    tdElem.setAttribute("colspan", "2");
+    refreshAlertBanner.appendChild(tdElem);
+
+    tdElem.style.backgroundColor = "orange";
+    tdElem.textContent = message;
+    toggleElem.parentNode.insertBefore(
+      refreshAlertBanner,
+      toggleElem.nextSibling
+    );
+
+    // fade out then remove
+    setTimeout(() => {
+      // start fade out
+      refreshAlertBanner.style.opacity = 0;
+
+      // listen for the end of the transition, then remove element
+      refreshAlertBanner.addEventListener(
+        "transitionend",
+        () => {
+          refreshAlertBanner.remove();
+        },
+        { once: true }
+      );
+    }, 1000 * timeoutInSeconds);
+  }
   const newestFilterToggle = document.getElementById("newest-filter-toggle");
 
   // update filter when toggle is clicked
   newestFilterToggle.addEventListener("change", () => {
     const isFilterEnabled = newestFilterToggle.checked;
+
+    if (!isFilterEnabled && realSortToggle.checked) {
+      // it makes sense to always have the "real sort" disabled when "newest filter" is disabled
+      realSortToggle.checked = false;
+      realSortToggle.dispatchEvent(new Event("change"));
+      showMessageBanner(
+        "ℹ️ 'Actually Sort Listings' is OFF when 'Auto Newest Filter' is OFF 🔴",
+        5
+      );
+    }
 
     chrome.storage.sync.set({ listenerEnabled: isFilterEnabled }, () => {
       chrome.runtime.sendMessage({
@@ -22,34 +66,17 @@ document.addEventListener("DOMContentLoaded", () => {
       // it makes sense to always have the "newest filter" enabled when "real sort" is enabled
       newestFilterToggle.checked = true;
       newestFilterToggle.dispatchEvent(new Event("change"));
+      showMessageBanner(
+        "ℹ️ 'Auto Newest Filter' is ON when 'Actually Sort Listings' is ON 🟢",
+        5
+      );
     }
 
     chrome.storage.sync.set({ realSortEnabled: isRealSortEnabled }, () => {
       // TODO: make the alert fit the menu when it appears / cleaner
 
       // get tr element which contains a real-sort-toggle id element
-      const toggleElem = document
-        .querySelector("#real-sort-toggle")
-        .closest("tr");
-      let refreshAlertBanner = document.createElement("div");
-      let trElem = document.createElement("tr");
-      trElem.classList.add("tr-alert-banner");
-      let tdElem = document.createElement("td");
-      // colspan 2 to make it full width
-      tdElem.setAttribute("colspan", "2");
-      tdElem.classList.add("td-alert-banner");
-      refreshAlertBanner.classList.add("refresh-alert-banner");
-      refreshAlertBanner.style.backgroundColor = "orange";
-      refreshAlertBanner.textContent =
-        "Refresh the page to apply the sorting changes!";
-      toggleElem.parentNode.insertBefore(
-        refreshAlertBanner,
-        toggleElem.nextSibling
-      );
-      // show this banner only 3 seconds
-      setTimeout(() => {
-        refreshAlertBanner.remove();
-      }, 3000);
+      showMessageBanner("🔄 Refresh the page to apply the sorting changes!", 3);
     });
   });
 

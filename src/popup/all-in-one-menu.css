@@ -117,3 +117,8 @@ input:checked + .slider:before {
 .blacklisted.sellers li button:hover {
   background-color: #cc0000;
 }
+
+.refresh-alert-banner {
+  transition: opacity 0.5s ease;
+  opacity: 1;
+}
